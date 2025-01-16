@@ -30,7 +30,7 @@ public class Program : Form
         {
             Dock = DockStyle.Top,
             Height = 80,
-            Padding = new Padding(0, 0, 0, 10) 
+            Padding = new Padding(10)
         };
 
         display = new TextBox
@@ -42,7 +42,7 @@ public class Program : Form
             BackColor = Color.White,
             BorderStyle = BorderStyle.None,
             ForeColor = Color.Black,
-            MaxLength = 15 
+            MaxLength = 15
         };
 
         displayPanel.Controls.Add(display);
@@ -73,18 +73,80 @@ public class Program : Form
                 {
                     Text = buttons[row, col],
                     Font = new Font("Arial", 24, FontStyle.Bold),
-                    Height = 70,
+                    Height = 50,
                     Dock = DockStyle.Fill,
                     BackColor = Color.Red,
                     ForeColor = Color.White,
                     FlatStyle = FlatStyle.Flat,
                     Margin = new Padding(5),
-                    R
                 };
+                button.FlatAppearance.BorderSize = 0;
                 buttonPanel.Controls.Add(button, col, row);
+                button.Click += Button_Click;
             };
         };
         Controls.Add(buttonPanel);
         Controls.Add(displayPanel);
+    }
+
+    private void Button_Click(object sender, EventArgs e)
+    {
+        var button = (Button)sender;
+        string text = button.Text;
+
+        if (text == "C")
+        {
+            currentInput = "";
+            firstOperand = 0;
+            currentOperation = "";
+            display.Text = currentInput;
+        }
+        else if (text == "=")
+        {
+            if (!string.IsNullOrEmpty(currentOperation) && double.TryParse(currentInput, out double secondOperand))
+            {
+                switch (currentOperation)
+                {
+                    case "+":
+                        display.Text = (firstOperand + secondOperand).ToString();
+                        break;
+                    case "-":
+                        display.Text = (firstOperand - secondOperand).ToString();
+                        break;
+                    case "*":
+                        display.Text = (firstOperand * secondOperand).ToString();
+                        break;
+                    case "/":
+                        display.Text = secondOperand != 0 ? (firstOperand / secondOperand).ToString() : "Division Error";
+                        break;
+                    case "%":
+                        display.Text = (firstOperand * secondOperand / 100).ToString();
+                        break;
+                }
+            }
+            currentInput = "";
+            currentOperation = "";
+        }
+        else if (text == "+" || text == "-" || text == "*" || text == "/" || text == "%")
+        {
+            if (double.TryParse(currentInput, out firstOperand))
+            {
+                currentInput = "";
+                currentOperation = text;
+            }
+        }
+        else if (text == ".")
+        {
+            if (!currentInput.Contains("."))
+            {
+                currentInput += text;
+                display.Text = currentInput;
+            }
+        }
+        else
+        {
+            currentInput += text;
+            display.Text = currentInput;
+        }
     }
 }
