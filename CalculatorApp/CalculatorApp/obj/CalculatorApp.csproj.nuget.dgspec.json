@@ -13,13 +13,20 @@
         "packagesPath": "C:\\Users\\ACER_NITRO\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\ACER_NITRO\\Desktop\\caclulator-app\\CalculatorApp\\CalculatorApp\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "D:\\Programms\\VS BASIC\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\ACER_NITRO\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\ACER_NITRO\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net9.0-windows"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
