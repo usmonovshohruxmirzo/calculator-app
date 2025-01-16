@@ -46,5 +46,45 @@ public class Program : Form
         };
 
         displayPanel.Controls.Add(display);
+
+        var buttonPanel = new TableLayoutPanel
+        {
+            Dock = DockStyle.Fill,
+            RowCount = 5,
+            ColumnCount = 4,
+            BackColor = Color.LightGray,
+            Padding = new Padding(10)
+        };
+
+        string[,] buttons = new string[,]
+        {
+            { "7", "8", "9", "/" },
+            { "4", "5", "6", "*" },
+            { "1", "2", "3", "-" },
+            { "0", ".", "=", "+" },
+            { "C", "(", ")", "%" }
+        };
+
+        for (int row = 0; row < 5; row++)
+        {
+            for (int col = 0; col < 4; col++)
+            {
+                var button = new Button
+                {
+                    Text = buttons[row, col],
+                    Font = new Font("Arial", 24, FontStyle.Bold),
+                    Height = 70,
+                    Dock = DockStyle.Fill,
+                    BackColor = Color.Red,
+                    ForeColor = Color.White,
+                    FlatStyle = FlatStyle.Flat,
+                    Margin = new Padding(5),
+                    R
+                };
+                buttonPanel.Controls.Add(button, col, row);
+            };
+        };
+        Controls.Add(buttonPanel);
+        Controls.Add(displayPanel);
     }
 }
